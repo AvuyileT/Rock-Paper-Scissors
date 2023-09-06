@@ -3,26 +3,38 @@ function getComputerChoice() {
   let answer = Math.floor(Math.random() * choice.length);
   return answer;
 }
-console.log(getComputerChoice())
+
+var playerScore = 0;
+var computerScore = 0;
 
 function playSingleRound(playerSelection, computerSelection) {
-    if (playerSelection == "rock" && computerSelection == 1) {
-        return "Paper beats rock. You Lose!";
-    } else if (playerSelection == "rock" && computerSelection == 2) {
-        return "Rock beats scissors. You win!";
-    } else if (playerSelection == "paper" && computerSelection == 0) {
-        return "Paper beats rock. You win!";
-    } else if (playerSelection == "paper" && computerSelection == 2) {
-        return "Scissors cut paper. You lose!";
-    } else if (playerSelection == "scissors" && computerSelection == 0) {
-        return "Rock beats scissors. You lose!";
-    } else if (playerSelection == "scissors" && computerSelection == 1) {
-        return "Scissors cut paper. You win!";
-    } else {
-        return "It's a tie. Play Again!";
-    }
+  if (
+    (playerSelection == "rock" && computerSelection == 1) ||
+    (playerSelection == "paper" && computerSelection == 2) ||
+    (playerSelection == "scissors" && computerSelection == 0)
+  ) {
+    console.log("You Lose!");
+    computerScore++;
+  } else if (
+    (playerSelection == "rock" && computerSelection == 2) ||
+    (playerSelection == "paper" && computerSelection == 0) ||
+    (playerSelection == "scissors" && computerSelection == 1)
+  ) {
+    console.log("You win!");
+    playerScore++;
+  } else {
+    console.log("It's a tie. Play Again!");
+  }
 }
 
-const playerSelection = "paper";
-const computerSelection = getComputerChoice();
-console.log(playSingleRound(playerSelection, computerSelection));
+function game() {
+  for (i = 1; i <= 5; i++) {
+    const playerSelection = prompt(
+      "Rock, Paper, Scissors! What is your answer? "
+    );
+    const computerSelection = getComputerChoice();
+    console.log(playSingleRound(playerSelection, computerSelection));
+  }
+  return { playerScore, computerScore };
+}
+console.log(game());
